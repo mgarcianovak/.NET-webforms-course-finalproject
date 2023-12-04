@@ -17,18 +17,26 @@ namespace Controller
 
         public DataAccess()
         {
-            connection = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_DB; integrated security = true");
-            command = new SqlCommand();
-            command.Connection = connection;
+            connection = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security = true");
+            command = new SqlCommand
+            {
+                Connection = connection
+            };
         }
 
-        public void setCommandText(string commandText)
+        public void SetCommandText(string commandText)
         {
             command.CommandType = System.Data.CommandType.Text;
             command.CommandText = commandText;
         }
 
-        public void readData()
+        public void SetStoredProcedure(string storedProcedure)
+        {
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.CommandText = storedProcedure;
+        }
+
+        public void ReadData()
         {
             try
             {
@@ -41,7 +49,7 @@ namespace Controller
             }
         }
 
-        public void nonQuery()
+        public void ExecuteNonQuery()
         {
             try
             {
@@ -54,14 +62,14 @@ namespace Controller
             }
         }
 
-        public void setParameters(string parameter, object value)
+        public void SetParameter(string parameter, object value)
         {
             command.Parameters.AddWithValue(parameter, value);
         }
 
-        public void closeConnection()
+        public void CloseConnection()
         {
-            if (reader != null) reader.Close();
+            reader?.Close();
             connection.Close();
         }
     }

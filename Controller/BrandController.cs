@@ -9,20 +9,22 @@ namespace Controller
 {
     public class BrandController
     { 
-        public List<Brand> list()
+        public List<Brand> List()
         {
             List<Brand> brandList = new List<Brand>();
             DataAccess dataAccess = new DataAccess();
 
             try
             {
-                dataAccess.setCommandText("Select Id, Descripcion from MARCAS");
-                dataAccess.readData();
+                dataAccess.SetCommandText("Select Id, Descripcion from MARCAS");
+                dataAccess.ReadData();
                 while (dataAccess.Reader.Read())
                 {
-                    Brand aux = new Brand();
-                    aux.Id = (int)dataAccess.Reader["Id"];
-                    aux.Name = (string)dataAccess.Reader["Descripcion"];
+                    Brand aux = new Brand
+                    {
+                        Id = (int)dataAccess.Reader["Id"],
+                        Name = (string)dataAccess.Reader["Descripcion"]
+                    };
                     brandList.Add(aux);
                 }
                 return brandList;

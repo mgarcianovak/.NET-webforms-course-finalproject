@@ -9,20 +9,22 @@ namespace Controller
 {
     public class CategoryController
     {
-        public List<Category> list()
+        public List<Category> List()
         {
             List<Category> categoryList = new List<Category>();
             DataAccess dataAccess = new DataAccess();
 
             try
             {
-                dataAccess.setCommandText("Select Id, Descripcion from CATEGORIAS");
-                dataAccess.readData();
+                dataAccess.SetCommandText("Select Id, Descripcion from CATEGORIAS");
+                dataAccess.ReadData();
                 while (dataAccess.Reader.Read())
                 {
-                    Category aux = new Category();
-                    aux.Id = (int)dataAccess.Reader["Id"];
-                    aux.Name = (string)dataAccess.Reader["Descripcion"];
+                    Category aux = new Category
+                    {
+                        Id = (int)dataAccess.Reader["Id"],
+                        Name = (string)dataAccess.Reader["Descripcion"]
+                    };
                     categoryList.Add(aux);
                 }
                 return categoryList;

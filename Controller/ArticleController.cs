@@ -10,23 +10,25 @@ namespace Controller
 {
     public class ArticleController
     {
-        private DataAccess dataAccess = new DataAccess();
+        private readonly DataAccess dataAccess = new DataAccess();
 
-        public List<Article> listArticles()
+        public List<Article> ListArticles()
         {
             List<Article> articleList = new List<Article>();
             try
             {
-                dataAccess.setCommandText("Select a.Id, Codigo, Nombre, a.Descripcion, c.Descripcion Categoria, IdCategoria, m.Descripcion Marca, IdMarca, ImagenUrl, Precio from ARTICULOS a, CATEGORIAS c, MARCAS m Where IdMarca=m.Id and IdCategoria = c.Id");
-                dataAccess.readData();
+                dataAccess.SetCommandText("Select a.Id, Codigo, Nombre, a.Descripcion, c.Descripcion Categoria, IdCategoria, m.Descripcion Marca, IdMarca, ImagenUrl, Precio from ARTICULOS a, CATEGORIAS c, MARCAS m Where IdMarca=m.Id and IdCategoria = c.Id");
+                dataAccess.ReadData();
 
                 while (dataAccess.Reader.Read())
                 {
-                    Article aux = new Article();
-                    aux.Id= (int)dataAccess.Reader["Id"];
-                    aux.Code = (string)dataAccess.Reader["Codigo"];
-                    aux.Name = (string)dataAccess.Reader["Nombre"];
-                    aux.Description = (string)dataAccess.Reader["Descripcion"];
+                    Article aux = new Article
+                    {
+                        Id = (int)dataAccess.Reader["Id"],
+                        Code = (string)dataAccess.Reader["Codigo"],
+                        Name = (string)dataAccess.Reader["Nombre"],
+                        Description = (string)dataAccess.Reader["Descripcion"]
+                    };
                     aux.Category.Name = (string)dataAccess.Reader["Categoria"];
                     aux.Category.Id = (int)dataAccess.Reader["IdCategoria"];
                     aux.Brand.Name = (string)dataAccess.Reader["Marca"];
@@ -46,11 +48,11 @@ namespace Controller
             }
             finally
             {
-                dataAccess.closeConnection();
+                dataAccess.CloseConnection();
             }
         }
 
-        public List<Article> filterSearch(string field, string criterion, string filter)
+        public List<Article> FilterSearch(string field, string criterion, string filter)
         {
             string query = "Select a.Id, Codigo, Nombre, a.Descripcion, c.Descripcion Categoria, IdCategoria, m.Descripcion Marca, IdMarca, ImagenUrl, Precio from ARTICULOS a, CATEGORIAS c, MARCAS m Where IdMarca=m.Id and IdCategoria = c.Id and ";
             List<Article> filteredList = new List<Article>();
@@ -58,16 +60,16 @@ namespace Controller
             switch (field)
             {
                 case "Id":
-                    query += filterQuery("a.Id ", criterion, filter);
+                    query += FilterQuery("a.Id ", criterion, filter);
                     break;
                 case "Código":
-                    query += filterQuery("Codigo ", criterion, filter);
+                    query += FilterQuery("Codigo ", criterion, filter);
                     break;
                 case "Nombre":
-                    query += filterQuery("Nombre ", criterion, filter);
+                    query += FilterQuery("Nombre ", criterion, filter);
                     break;
                 case "Precio":
-                    query += filterQuery("Precio ", criterion, filter);
+                    query += FilterQuery("Precio ", criterion, filter);
                     break;
                 case "Marca":
                     query += "m.Descripcion = '" + criterion + "'";
@@ -79,15 +81,17 @@ namespace Controller
 
             try
             {
-                dataAccess.setCommandText(query);
-                dataAccess.readData();
+                dataAccess.SetCommandText(query);
+                dataAccess.ReadData();
                 while (dataAccess.Reader.Read())
                 {
-                    Article aux = new Article();
-                    aux.Id = (int)dataAccess.Reader["Id"];
-                    aux.Code = (string)dataAccess.Reader["Codigo"];
-                    aux.Name = (string)dataAccess.Reader["Nombre"];
-                    aux.Description = (string)dataAccess.Reader["Descripcion"];
+                    Article aux = new Article
+                    {
+                        Id = (int)dataAccess.Reader["Id"],
+                        Code = (string)dataAccess.Reader["Codigo"],
+                        Name = (string)dataAccess.Reader["Nombre"],
+                        Description = (string)dataAccess.Reader["Descripcion"]
+                    };
                     aux.Category.Name = (string)dataAccess.Reader["Categoria"];
                     aux.Category.Id = (int)dataAccess.Reader["IdCategoria"];
                     aux.Brand.Name = (string)dataAccess.Reader["Marca"];
@@ -107,11 +111,11 @@ namespace Controller
             }
             finally
             {
-                dataAccess.closeConnection();
+                dataAccess.CloseConnection();
             }
         }
 
-        private string filterQuery(string query, string criterion, string filter)
+        private string FilterQuery(string query, string criterion, string filter)
         {
             switch (criterion)
             {
@@ -137,19 +141,19 @@ namespace Controller
             return query;
         }
 
-        public void addArticle(Article aux)
+        public void AddArticle(Article aux)
         {
             try
             {
-                dataAccess.setCommandText("insert into ARTICULOS values(@code, @name, @description, @brand, @category, @url, @price)");
-                dataAccess.setParameters("@code", aux.Code);
-                dataAccess.setParameters("@name", aux.Name);
-                dataAccess.setParameters("@description", aux.Description);
-                dataAccess.setParameters("@brand", aux.Brand.Id);
-                dataAccess.setParameters("@category", aux.Category.Id);
-                dataAccess.setParameters("@url", aux.ImageUrl);
-                dataAccess.setParameters("@price", aux.Price);
-                dataAccess.nonQuery();
+                dataAccess.SetCommandText("insert into ARTICULOS values(@code, @name, @description, @brand, @category, @url, @price)");
+                dataAccess.SetParameter("@code", aux.Code);
+                dataAccess.SetParameter("@name", aux.Name);
+                dataAccess.SetParameter("@description", aux.Description);
+                dataAccess.SetParameter("@brand", aux.Brand.Id);
+                dataAccess.SetParameter("@category", aux.Category.Id);
+                dataAccess.SetParameter("@url", aux.ImageUrl);
+                dataAccess.SetParameter("@price", aux.Price);
+                dataAccess.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -157,24 +161,24 @@ namespace Controller
             }
             finally
             {
-                dataAccess.closeConnection();
+                dataAccess.CloseConnection();
             }
         }
 
-        public void modifyArticle(Article aux)
+        public void ModifyArticle(Article aux)
         {
             try
             {
-                dataAccess.setCommandText("UPDATE ARTICULOS SET Codigo = @code, Nombre = @name, Descripcion = @description, IdMarca = @brand, IdCategoria = @category, ImagenUrl = @url, Precio = @price WHERE Id = @id");
-                dataAccess.setParameters("@code", aux.Code);
-                dataAccess.setParameters("@name", aux.Name);
-                dataAccess.setParameters("@description", aux.Description);
-                dataAccess.setParameters("@brand", aux.Brand.Id);
-                dataAccess.setParameters("@category", aux.Category.Id);
-                dataAccess.setParameters("@url", aux.ImageUrl);
-                dataAccess.setParameters("@price", aux.Price);
-                dataAccess.setParameters("@id", aux.Id);
-                dataAccess.nonQuery();
+                dataAccess.SetCommandText("UPDATE ARTICULOS SET Codigo = @code, Nombre = @name, Descripcion = @description, IdMarca = @brand, IdCategoria = @category, ImagenUrl = @url, Precio = @price WHERE Id = @id");
+                dataAccess.SetParameter("@code", aux.Code);
+                dataAccess.SetParameter("@name", aux.Name);
+                dataAccess.SetParameter("@description", aux.Description);
+                dataAccess.SetParameter("@brand", aux.Brand.Id);
+                dataAccess.SetParameter("@category", aux.Category.Id);
+                dataAccess.SetParameter("@url", aux.ImageUrl);
+                dataAccess.SetParameter("@price", aux.Price);
+                dataAccess.SetParameter("@id", aux.Id);
+                dataAccess.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -182,17 +186,17 @@ namespace Controller
             }
             finally
             {
-                dataAccess.closeConnection();
+                dataAccess.CloseConnection();
             }
         }
 
-        public void deleteArticle(Article aux)
+        public void DeleteArticle(Article aux)
         {
             try
             {
-                dataAccess.setCommandText("DELETE ARTICULOS WHERE Id = @id");
-                dataAccess.setParameters("@id", aux.Id);
-                dataAccess.nonQuery();
+                dataAccess.SetCommandText("DELETE ARTICULOS WHERE Id = @id");
+                dataAccess.SetParameter("@id", aux.Id);
+                dataAccess.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -200,7 +204,7 @@ namespace Controller
             }
             finally
             {
-                dataAccess.closeConnection();
+                dataAccess.CloseConnection();
             }
         }
         
