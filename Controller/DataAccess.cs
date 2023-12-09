@@ -35,6 +35,10 @@ namespace Controller
             command.CommandType = System.Data.CommandType.StoredProcedure;
             command.CommandText = storedProcedure;
         }
+        public void SetParameter(string parameter, object value)
+        {
+            command.Parameters.AddWithValue(parameter, value);
+        }
 
         public void ReadData()
         {
@@ -62,10 +66,6 @@ namespace Controller
             }
         }
 
-        public void SetParameter(string parameter, object value)
-        {
-            command.Parameters.AddWithValue(parameter, value);
-        }
 
         public void CloseConnection()
         {

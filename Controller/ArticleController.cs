@@ -17,7 +17,9 @@ namespace Controller
             List<Article> articleList = new List<Article>();
             try
             {
-                dataAccess.SetCommandText("Select a.Id, Codigo, Nombre, a.Descripcion, c.Descripcion Categoria, IdCategoria, m.Descripcion Marca, IdMarca, ImagenUrl, Precio from ARTICULOS a, CATEGORIAS c, MARCAS m Where IdMarca=m.Id and IdCategoria = c.Id");
+                dataAccess.SetCommandText("SELECT a.Id, Codigo, Nombre, a.Descripcion, c.Descripcion Categoria, IdCategoria, m.Descripcion Marca, IdMarca, ImagenUrl, Precio " +
+                    "FROM ARTICULOS a, CATEGORIAS c, MARCAS m " +
+                    "WHERE IdMarca=m.Id AND IdCategoria = c.Id");
                 dataAccess.ReadData();
 
                 while (dataAccess.Reader.Read())
@@ -29,10 +31,10 @@ namespace Controller
                         Name = (string)dataAccess.Reader["Nombre"],
                         Description = (string)dataAccess.Reader["Descripcion"]
                     };
-                    aux.Category.Name = (string)dataAccess.Reader["Categoria"];
-                    aux.Category.Id = (int)dataAccess.Reader["IdCategoria"];
                     aux.Brand.Name = (string)dataAccess.Reader["Marca"];
                     aux.Brand.Id = (int)dataAccess.Reader["IdMarca"];
+                    aux.Category.Id = (int)dataAccess.Reader["IdCategoria"];
+                    aux.Category.Name = (string)dataAccess.Reader["Categoria"];
                     if (!(dataAccess.Reader["ImagenUrl"] is DBNull))
                     {
                         aux.ImageUrl = (string)dataAccess.Reader["ImagenUrl"];
@@ -207,6 +209,44 @@ namespace Controller
                 dataAccess.CloseConnection();
             }
         }
-        
+
+        public Article SearchArticleById(int id)
+        {
+            Article article = new Article();
+            try
+            {
+                dataAccess.SetCommandText("SELECT a.Id, Codigo, Nombre, a.Descripcion, c.Descripcion Categoria, IdCategoria, m.Descripcion Marca, IdMarca, ImagenUrl, Precio " +
+                    "FROM ARTICULOS a, CATEGORIAS c, MARCAS m " +
+                    $"WHERE IdMarca = m.Id AND IdCategoria = c.Id AND a.Id = {id}");
+                dataAccess.ReadData();
+
+                while (dataAccess.Reader.Read())
+                {
+                    article.Id = (int)dataAccess.Reader["Id"];
+                    article.Code = (string)dataAccess.Reader["Codigo"];
+                    article.Name = (string)dataAccess.Reader["Nombre"];
+                    article.Description = (string)dataAccess.Reader["Descripcion"];
+                    article.Brand.Name = (string)dataAccess.Reader["Marca"];
+                    article.Brand.Id = (int)dataAccess.Reader["IdMarca"];
+                    article.Category.Id = (int)dataAccess.Reader["IdCategoria"];
+                    article.Category.Name = (string)dataAccess.Reader["Categoria"];
+                    if (!(dataAccess.Reader["ImagenUrl"] is DBNull))
+                    {
+                        article.ImageUrl = (string)dataAccess.Reader["ImagenUrl"];
+                    }
+                    article.Price = (Decimal)dataAccess.Reader["Precio"];
+                }
+                return article;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                dataAccess.CloseConnection();
+            }
+        }
+
     }
 }

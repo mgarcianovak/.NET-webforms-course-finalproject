@@ -10,13 +10,20 @@ using System.Web.UI.WebControls;
 namespace Views
 {
     public partial class Default : System.Web.UI.Page
-    {
-        public List<Article> articleList;
-
+    { 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ArticleController articleController = new ArticleController();
-            articleList = articleController.ListArticles();
+            if (!IsPostBack)
+            {
+                ArticleController articleController = new ArticleController();
+                repHomeGrid.DataSource = articleController.ListArticles();
+                repHomeGrid.DataBind();
+            }
+        }
+
+        protected void btnSeeDetail_Click(object sender, EventArgs e)
+        {
+            Response.Redirect($"ArticleDetail.aspx?id={((Button)sender).CommandArgument}", false);
         }
     }
 }

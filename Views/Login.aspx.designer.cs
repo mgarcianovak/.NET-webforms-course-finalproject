@@ -15,13 +15,13 @@ namespace Views
     {
 
         /// <summary>
-        /// Control txtbUsername.
+        /// Control txtbEmail.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtbUsername;
+        protected global::System.Web.UI.WebControls.TextBox txtbEmail;
 
         /// <summary>
         /// Control txtbPassword.
@@ -31,6 +31,15 @@ namespace Views
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtbPassword;
+
+        /// <summary>
+        /// Control lblIncorrectData.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblIncorrectData;
 
         /// <summary>
         /// Control btnLogin.
