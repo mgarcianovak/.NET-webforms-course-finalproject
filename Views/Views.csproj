@@ -68,10 +68,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ArticleDetail.aspx" />
+    <Content Include="ArticleManagement.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
-    <Content Include="Profile.aspx" />
+    <Content Include="UserInformation.aspx" />
     <Content Include="Styles\Styles.css" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -82,6 +83,13 @@
     </Compile>
     <Compile Include="ArticleDetail.aspx.designer.cs">
       <DependentUpon>ArticleDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ArticleManagement.aspx.cs">
+      <DependentUpon>ArticleManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArticleManagement.aspx.designer.cs">
+      <DependentUpon>ArticleManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -100,12 +108,12 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Profile.aspx.cs">
-      <DependentUpon>Profile.aspx</DependentUpon>
+    <Compile Include="UserInformation.aspx.cs">
+      <DependentUpon>UserInformation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Profile.aspx.designer.cs">
-      <DependentUpon>Profile.aspx</DependentUpon>
+    <Compile Include="UserInformation.aspx.designer.cs">
+      <DependentUpon>UserInformation.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SiteMaster.Master.cs">

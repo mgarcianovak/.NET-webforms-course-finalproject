@@ -1,12 +1,6 @@
 ﻿using Controller;
 using Model;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Views
 {
@@ -20,10 +14,12 @@ namespace Views
 
             if (Validation.IsTextBoxEmpty(txtbEmail))
             {
+                lblIncorrectData.CssClass = CssClassController.AddClass(lblIncorrectData.CssClass, "d-none");
                 isLoginValid = false;
             }
             if (Validation.IsTextBoxEmpty(txtbPassword))
             {
+                lblIncorrectData.CssClass = CssClassController.AddClass(lblIncorrectData.CssClass, "d-none");
                 isLoginValid = false;
             }
 
@@ -46,8 +42,9 @@ namespace Views
             User user = userController.Login(txtbEmail.Text, txtbPassword.Text);
             if (user == null)
             {
-                txtbEmail.CssClass = Validation.ChangeValidState(txtbEmail.CssClass, false);
-                txtbPassword.CssClass = Validation.ChangeValidState(txtbPassword.CssClass, false);
+                lblIncorrectData.CssClass = CssClassController.RemoveClass(lblIncorrectData.CssClass, "d-none");
+                txtbEmail.CssClass = CssClassController.ChangeValidState(txtbEmail.CssClass, false);
+                txtbPassword.CssClass = CssClassController.ChangeValidState(txtbPassword.CssClass, false);
             }
             else
             {

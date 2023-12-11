@@ -17,13 +17,13 @@
                 <asp:TextBox runat="server" CssClass="form-control" ID="txtbPassword" TextMode="Password" />
             </div>
         </div>
-        <asp:Label ID="lblIncorrectData" CssClass="form-label mb-3" runat="server" Text="Usuario o contraseña incorrectos. Por favor, vuelta a intentarlo" Visible="true" ForeColor="Red"></asp:Label>
-        <div class="row mb-3">
+        <asp:Label ID="lblIncorrectData" CssClass="form-label mb-3 d-none" runat="server" Text="Usuario o contraseña incorrectos. Por favor, vuelta a intentarlo" ForeColor="Red"></asp:Label>
+        <div class="row mt-3">
             <div class="col-5">
                 <asp:Button ID="btnLogin" Text="Iniciar sesión" CssClass="btn btn-primary" OnClick="btnLogin_Click" runat="server" />
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <div class="col-5">
                 <asp:Button ID="btnCreateNewAccount" Text="Crear una nueva cuenta" CssClass="btn btn-outline-primary" OnClick="btnCreateNewAccount_Click" runat="server" />
             </div>

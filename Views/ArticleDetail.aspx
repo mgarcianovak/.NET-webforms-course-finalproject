@@ -7,7 +7,7 @@
         <div class="card w-75 mx-auto my-4">
             <div class="row">
                 <div class="col-md-8">
-                    <img src="<%: article.ImageUrl %>" class="img-fluid" alt="<%: article.Name %>">
+                    <img src="<%: article.ImageUrl %>" class="img-fluid" alt="<%: article.Name %>" onerror="this.onerror=null; this.src='Photos/article-default.jpg'">
                 </div>
                 <div class="col-md-4">
                     <div class="card-body text-start">

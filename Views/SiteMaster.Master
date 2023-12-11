@@ -14,23 +14,46 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-md bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="Default.aspx">Tienda Online</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav w-100">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="Default.aspx">Inicio</a>
+                            <a class="nav-link" aria-current="page" href="Default.aspx">Inicio</a>
                         </li>
+                        <%if (isAdmin)
+                            {
+                        %>
                         <li class="nav-item">
-                            <a class="nav-link" href="Profile.aspx">Mi perfil</a>
+                            <a class="nav-link" href="ArticleManagement.aspx">Listado de artículos</a>
                         </li>
-                        <li class="nav-item">
+
+                        <%
+                            }
+                            if (loggedIn)
+                            { %>
+                        <li class="nav-item dropdown ms-lg-auto">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mi perfil </a>
+                            <ul class="dropdown-menu dropdown-menu-lg-end">
+                                <li>
+                                    <a class="nav-link px-2" href="UserInformation.aspx">Datos personales</a>
+                                </li>
+                                <li>
+                                    <asp:Button Text="Cerrar sesión" CssClass="btn nav-link px-2" ID="btnLogOut" runat="server" OnClick="btnLogout_Click" />
+
+                                </li>
+                            </ul>
+                        </li>
+                        <%}
+                            else
+                            { %>
+                        <li class="nav-item ms-lg-auto">
                             <a class="nav-link" href="Login.aspx">Iniciar sesión</a>
                         </li>
+                        <%}%>
                     </ul>
                 </div>
             </div>
