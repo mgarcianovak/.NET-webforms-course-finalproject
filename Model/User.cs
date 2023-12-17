@@ -20,6 +20,6 @@ namespace Model
 
         public string ImageUrl { get; set; }
 
-        public bool isAdmin { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

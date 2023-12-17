@@ -1,5 +1,7 @@
 ﻿using Controller;
+using System.Web.UI;
 using System.Web.UI.WebControls;
+using Views;
 
 namespace Model
 {

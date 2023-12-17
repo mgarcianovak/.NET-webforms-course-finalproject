@@ -60,22 +60,58 @@ namespace Views
         protected global::System.Web.UI.WebControls.DropDownList ddlCriterion;
 
         /// <summary>
-        /// Control lblFilter.
+        /// Control lblNameFilter.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFilter;
+        protected global::System.Web.UI.WebControls.Label lblNameFilter;
 
         /// <summary>
-        /// Control txtbFilter.
+        /// Control txtbName.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtbFilter;
+        protected global::System.Web.UI.WebControls.TextBox txtbName;
+
+        /// <summary>
+        /// Control lblGreaterThan.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblGreaterThan;
+
+        /// <summary>
+        /// Control txtbGreaterThan.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtbGreaterThan;
+
+        /// <summary>
+        /// Control lblLessThan.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLessThan;
+
+        /// <summary>
+        /// Control txtbLessThan.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtbLessThan;
 
         /// <summary>
         /// Control btnApplyFilter.
@@ -85,6 +121,15 @@ namespace Views
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnApplyFilter;
+
+        /// <summary>
+        /// Control btnCleanFilters.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCleanFilters;
 
         /// <summary>
         /// Control repHomeGrid.

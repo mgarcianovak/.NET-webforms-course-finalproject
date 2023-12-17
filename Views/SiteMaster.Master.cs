@@ -7,18 +7,22 @@ namespace Views
     public partial class SiteMaster : System.Web.UI.MasterPage
     {
         public UserController userController = new UserController();
-        public User user;
-        public bool loggedIn;
-        public bool isAdmin;
+
+        public User User { get; set; }
+
+        public bool IsLoggedIn { get; set; }
+
+        public bool IsAdmin { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            loggedIn = false;
-            isAdmin = false;
+            IsLoggedIn = false;
+            IsAdmin = false;
             if (Session["user"] != null)
             {
-                loggedIn = true;
-                user = userController.GetUserById(int.Parse((string)Session["user"]));
-                isAdmin = user.isAdmin;
+                IsLoggedIn = true;
+                User = userController.GetUserById(int.Parse((string)Session["user"]));
+                IsAdmin = User.IsAdmin;
             }
 
         }
@@ -26,7 +30,7 @@ namespace Views
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             Session.Clear();
-            Response.Redirect("Default.aspx",false);
+            Response.Redirect("Default.aspx", false);
         }
     }
 }

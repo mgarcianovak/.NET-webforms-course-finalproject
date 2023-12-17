@@ -25,7 +25,7 @@ namespace Views
                     }
                 }
 
-                article = articleController.SearchArticleById(int.Parse(Request.QueryString["id"]));
+                article = articleController.GetArticleById(int.Parse(Request.QueryString["id"]));
             }
         }
     }

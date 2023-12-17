@@ -10,7 +10,7 @@ namespace Views
     {
         ArticleController articleController = new ArticleController();
         List<Article> articleList;
-        public bool isFilterActive { get; set; }
+        public bool IsFilterActive { get; set; }
 
         private void FillCriterion(string field)
         {
@@ -19,25 +19,21 @@ namespace Views
             {
                 case "marca":
                     BrandController brandController = new BrandController();
-                    foreach (Brand brand in brandController.List())
-                    {
-                        ddlCriterion.Items.Add(brand.Name);
-                    }
+                    ddlCriterion.DataSource = brandController.List();
+                    ddlCriterion.DataTextField = "Description";
+                    ddlCriterion.DataValueField = "Id";
+                    ddlCriterion.DataBind();
                     break;
                 case "categoría":
                     CategoryController categoryController = new CategoryController();
-                    foreach (Category category in categoryController.List())
-                    {
-                        ddlCriterion.Items.Add(category.Name);
-                    }
+                    ddlCriterion.DataSource = categoryController.List();
+                    ddlCriterion.DataTextField = "Description";
+                    ddlCriterion.DataValueField = "Id";
+                    ddlCriterion.DataBind();
                     break;
                 case "precio":
                     ddlCriterion.Items.Add("Menor a");
                     ddlCriterion.Items.Add("Mayor a");
-                    lblFilter.Text = "Menor a:";
-                    break;
-                case "nombre":
-                    lblFilter.Text = "Nombre:";
                     break;
             }
         }
@@ -51,7 +47,7 @@ namespace Views
                 repHomeGrid.DataBind();
                 FillCriterion(ddlField.Text.ToLower());
             }
-            isFilterActive = chbxFilters.Checked;
+            IsFilterActive = chbxFilters.Checked;
         }
 
         protected void btnSeeDetail_Click(object sender, EventArgs e)
@@ -61,34 +57,36 @@ namespace Views
 
         protected void chbxFilters_CheckedChanged(object sender, EventArgs e)
         {
-            isFilterActive = chbxFilters.Checked;
+            IsFilterActive = chbxFilters.Checked;
         }
 
         protected void ddlField_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lblCriterion.Text = ddlField.SelectedValue+":";
+            lblCriterion.Text = ddlField.SelectedItem.Text + ":";
             FillCriterion(ddlField.Text.ToLower());
-        }
-
-        protected void ddlCriterion_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            lblFilter.Text = ddlCriterion.SelectedValue+":";
         }
 
         protected void btnApplyFilter_Click(object sender, EventArgs e)
         {
             if (ddlField.SelectedValue.ToLower().Equals("nombre"))
             {
-                articleList = articleController.FilterSearch("Nombre", "Contiene", txtbFilter.Text);
+                articleList = articleController.FilterSearch("Nombre", "Contiene", txtbName.Text);
             }
             else if (ddlField.SelectedValue.ToLower().Equals("precio"))
             {
-                articleList = articleController.FilterSearch("Precio", ddlCriterion.SelectedValue, txtbFilter.Text);
+                articleList = articleController.SearchArticlesBetweenPriceRange(decimal.Parse(txtbGreaterThan.Text), decimal.Parse(txtbLessThan.Text));
             }
             else
             {
                 articleList = articleController.FilterSearch(ddlField.SelectedValue, ddlCriterion.SelectedValue, "");
             }
+            repHomeGrid.DataSource = articleList;
+            repHomeGrid.DataBind();
+        }
+
+        protected void btnCleanFilters_Click(object sender, EventArgs e)
+        {
+            articleList = articleController.ListArticles();
             repHomeGrid.DataSource = articleList;
             repHomeGrid.DataBind();
         }

@@ -69,6 +69,8 @@
   <ItemGroup>
     <Content Include="ArticleDetail.aspx" />
     <Content Include="ArticleManagement.aspx" />
+    <Content Include="ArticleModification.aspx" />
+    <Content Include="SignUp.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
@@ -90,6 +92,20 @@
     </Compile>
     <Compile Include="ArticleManagement.aspx.designer.cs">
       <DependentUpon>ArticleManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ArticleModification.aspx.cs">
+      <DependentUpon>ArticleModification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArticleModification.aspx.designer.cs">
+      <DependentUpon>ArticleModification.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SignUp.aspx.cs">
+      <DependentUpon>SignUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SignUp.aspx.designer.cs">
+      <DependentUpon>SignUp.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

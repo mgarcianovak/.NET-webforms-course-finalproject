@@ -53,10 +53,5 @@ namespace Views
             }
 
         }
-
-        protected void btnCreateNewAccount_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

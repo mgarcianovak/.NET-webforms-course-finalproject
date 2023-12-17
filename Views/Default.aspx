@@ -6,11 +6,11 @@
     <asp:ScriptManager runat="server" />
     <div class="container-fluid">
         <div class="row mt-2">
-            <div class="col-6 col-md-4 col-lg-2">
+            <div class="col-auto">
                 <asp:CheckBox Text="Mostrar filtros" CssClass="form-control ps-2" OnCheckedChanged="chbxFilters_CheckedChanged" AutoPostBack="true" ID="chbxFilters" runat="server" />
             </div>
         </div>
-        <%if (isFilterActive)
+        <%if (IsFilterActive)
             {%>
         <asp:UpdatePanel ID="upFilters" runat="server">
             <ContentTemplate>
@@ -25,27 +25,44 @@
                         </asp:DropDownList>
                     </div>
 
-                    <%if (!(ddlField.SelectedValue.ToLower().Equals("nombre")))
-                        {  %>
+                    <%if (!(ddlField.SelectedValue.ToLower().Equals("nombre")) && !(ddlField.SelectedValue.ToLower().Equals("precio")))
+                        {
+                    %>
                     <div class="col-6 col-md-4 col-lg-3">
                         <asp:Label ID="lblCriterion" Text="Marca:" runat="server" />
-                        <asp:DropDownList ID="ddlCriterion" OnSelectedIndexChanged="ddlCriterion_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control mt-2" runat="server">
+                        <asp:DropDownList ID="ddlCriterion" CssClass="form-control mt-2" runat="server">
                         </asp:DropDownList>
                     </div>
-                    <%} %>
-                    <%if (ddlField.SelectedValue.ToLower().Equals("precio") || ddlField.SelectedValue.ToLower().Equals("nombre"))
-                        { %>
+                    <%}
+                        else if (ddlField.SelectedValue.ToLower().Equals("nombre"))
+                        {
+                    %>
                     <div class="col col-md-4 col-lg-3">
-                        <asp:Label ID="lblFilter" Text="Menor a:" runat="server" />
-                        <asp:TextBox CssClass="form-control mt-2" ID="txtbFilter" runat="server" />
+                        <asp:Label ID="lblNameFilter" Text="Nombre:" runat="server" />
+                        <asp:TextBox CssClass="form-control mt-2" ID="txtbName" runat="server" />
+                    </div>
+                    <%
+                        }%>
+                    <%else
+                    { %>
+                    <div class="col col-md-4 col-lg-3">
+                        <asp:Label ID="lblGreaterThan" Text="Desde:" runat="server" />
+                        <asp:TextBox CssClass="form-control mt-2" ID="txtbGreaterThan" runat="server" />
+                    </div>
+                    <div class="col col-md-4 col-lg-3">
+                        <asp:Label ID="lblLessThan" Text="Hasta:" runat="server" />
+                        <asp:TextBox CssClass="form-control mt-2" ID="txtbLessThan" runat="server" />
                     </div>
                     <% }%>
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
         <div class="row">
-            <div class="col col-lg-3 mt-auto">
-                <asp:Button ID="btnApplyFilter" CssClass="btn btn-secondary w-100 mt-2" Text="Filtrar" OnClick="btnApplyFilter_Click" runat="server" />
+            <div class="col col-md-4 col-lg-3 mt-auto">
+                <asp:Button ID="btnApplyFilter" CssClass="btn btn-primary w-100 mt-2" Text="Filtrar" OnClick="btnApplyFilter_Click" runat="server" />
+            </div>
+            <div class="col col-md-4 col-lg-3 mt-auto">
+                <asp:Button ID="btnCleanFilters" CssClass="btn btn-outline-primary w-100 mt-2" Text="Limpiar Filtros" OnClick="btnCleanFilters_Click" runat="server" />
             </div>
         </div>
         <% }%>

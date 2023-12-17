@@ -9,11 +9,11 @@ namespace Controller
 {
     public class BrandController
     { 
+        private readonly DataAccess dataAccess = new DataAccess();
+
         public List<Brand> List()
         {
             List<Brand> brandList = new List<Brand>();
-            DataAccess dataAccess = new DataAccess();
-
             try
             {
                 dataAccess.SetCommandText("Select Id, Descripcion from MARCAS");
@@ -23,7 +23,7 @@ namespace Controller
                     Brand aux = new Brand
                     {
                         Id = (int)dataAccess.Reader["Id"],
-                        Name = (string)dataAccess.Reader["Descripcion"]
+                        Description = (string)dataAccess.Reader["Descripcion"]
                     };
                     brandList.Add(aux);
                 }
@@ -32,6 +32,31 @@ namespace Controller
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public Brand GetBrandById(int id)
+        {
+            Brand brand = new Brand();
+            try
+            {
+                dataAccess.SetCommandText($"SELECT Descripcion FROM MARCAS WHERE Id = {id}");
+                dataAccess.ReadData();
+
+                while (dataAccess.Reader.Read())
+                {
+                    brand.Id = id;
+                    brand.Description = (string)dataAccess.Reader["Descripcion"];
+                }
+                return brand;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                dataAccess.CloseConnection();
             }
         }
     }
