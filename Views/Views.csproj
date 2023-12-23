@@ -70,6 +70,8 @@
     <Content Include="ArticleDetail.aspx" />
     <Content Include="ArticleManagement.aspx" />
     <Content Include="ArticleModification.aspx" />
+    <Content Include="Favorites.aspx" />
+    <Content Include="Scripts\alternateImg.js" />
     <Content Include="SignUp.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -99,6 +101,13 @@
     </Compile>
     <Compile Include="ArticleModification.aspx.designer.cs">
       <DependentUpon>ArticleModification.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Favorites.aspx.cs">
+      <DependentUpon>Favorites.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Favorites.aspx.designer.cs">
+      <DependentUpon>Favorites.aspx</DependentUpon>
     </Compile>
     <Compile Include="SignUp.aspx.cs">
       <DependentUpon>SignUp.aspx</DependentUpon>
@@ -154,7 +163,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Controller\Controller.csproj">

@@ -4,7 +4,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" />
-    <div class="container-fluid">
+    <div class="container-fluid px-3">
+        <div class="row mt-2">
+            <div class="col-auto">
+                <h2>Catálogo:</h2>
+            </div>
+        </div>
         <div class="row mt-2">
             <div class="col-auto">
                 <asp:CheckBox Text="Mostrar filtros" CssClass="form-control ps-2" OnCheckedChanged="chbxFilters_CheckedChanged" AutoPostBack="true" ID="chbxFilters" runat="server" />
@@ -66,19 +71,20 @@
             </div>
         </div>
         <% }%>
-        <div class="row row-cols-2 px-3">
+        <div class="row row-cols-2">
             <asp:Repeater ID="repHomeGrid" runat="server">
                 <ItemTemplate>
-                    <div class="col col-md-4 col-xl-2 p-2">
+                    <div class="col col-md-4 col-xl-3 py-2">
                         <div class="card container h-100">
                             <div class="card-img-container">
-                                <img src="<%# Eval("ImageUrl") %>" class="card-img-top" alt="<%# Eval("Name") %>" onerror="this.onerror=null; this.src='Photos/article-default.jpg'">
+                                <img src="<%# Eval("ImageUrl") %>" class="card-img-top" alt="<%# Eval("Name") %>" onerror="imgError(this)">
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase"><%# Eval("Name") %></h5>
                                 <h6 class="card-subtitle mb-2 text-body-secondary"><%# Eval("Brand") %></h6>
                                 <p class="card-text"><%# ((decimal)Eval("Price")).ToString("C2") %></p>
-                                <asp:Button Text="Ver más" CssClass="btn btn-secondary" ID="btnSeeDetail" OnClick="btnSeeDetail_Click" runat="server" CommandArgument='<%# Eval("Id")%>' CommandName="articleId" />
+                                <asp:Button Text="Ver más" CssClass="btn btn-secondary mb-2" ID="btnSeeDetail" OnClick="btnSeeDetail_Click" runat="server" CommandArgument='<%# Eval("Id")%>' CommandName="articleId" />
+                                <asp:Button Text='<%# Eval("IsFavoriteReturn") %>' CssClass="btn btn-outline-warning mb-2" ID="btnAddFavorite" OnClick="btnAddFavorite_Click" CommandArgument='<%# Eval("Id")%>' CommandName="articleId" runat="server" />
                             </div>
                         </div>
                     </div>

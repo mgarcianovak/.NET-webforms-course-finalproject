@@ -38,5 +38,15 @@ namespace Model
 
         [DisplayName("Precio")]
         public Decimal Price { get; set; }
+
+        public bool IsFavorite { get; set; }
+
+        public string IsFavoriteReturn 
+        {
+            get
+            {
+                return IsFavorite ? "Quitar de favoritos" : "Agregar a favoritos";
+            }
+        }
     }
 }

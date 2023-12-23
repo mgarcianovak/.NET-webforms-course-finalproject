@@ -9,21 +9,21 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <link href="Styles/Styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="Scripts/alternateImg.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body>
     <form id="form1" runat="server">
         <nav class="navbar navbar-expand-md bg-body-tertiary">
             <div class="container-fluid">
+                <a class="navbar-brand" href="Default.aspx">Inicio</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav w-100">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="Default.aspx">Inicio</a>
-                        </li>
                         <%if (IsAdmin)
                             {
                         %>
@@ -42,8 +42,10 @@
                                     <a class="nav-link px-2" href="UserInformation.aspx">Datos personales</a>
                                 </li>
                                 <li>
+                                    <a class="nav-link px-2" href="Favorites.aspx">Mis favoritos</a>
+                                </li>
+                                <li>
                                     <asp:Button Text="Cerrar sesión" CssClass="btn nav-link px-2" ID="btnLogOut" runat="server" OnClick="btnLogout_Click" />
-
                                 </li>
                             </ul>
                         </li>

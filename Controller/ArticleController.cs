@@ -11,6 +11,7 @@ namespace Controller
     public class ArticleController
     {
         private readonly DataAccess dataAccess = new DataAccess();
+        private readonly FavoriteController favoriteController = new FavoriteController();
 
         public List<Article> ListArticles()
         {
@@ -317,6 +318,5 @@ namespace Controller
             }
             return nextId;
         }
-
     }
 }

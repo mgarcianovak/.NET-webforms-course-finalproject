@@ -8,7 +8,8 @@ namespace Views
 {
     public partial class Default : System.Web.UI.Page
     {
-        ArticleController articleController = new ArticleController();
+        readonly ArticleController articleController = new ArticleController();
+        readonly FavoriteController favoriteController = new FavoriteController();
         List<Article> articleList;
         public bool IsFilterActive { get; set; }
 
@@ -38,16 +39,42 @@ namespace Views
             }
         }
 
+        private bool IsUserLoggedIn()
+        {
+            if (Session["user"] == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private void CheckUserFavorites(List<Article> articleList)
+        {
+            foreach (Article article in articleList)
+            {
+                article.IsFavorite = favoriteController.IsFavorite(int.Parse(Session["user"].ToString()), article.Id);
+            }
+        }
+
+        private void BindRepeaterDataSource()
+        {
+            repHomeGrid.DataSource = articleList;
+            repHomeGrid.DataBind();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 articleList = articleController.ListArticles();
-                repHomeGrid.DataSource = articleList;
-                repHomeGrid.DataBind();
+                if (IsUserLoggedIn())
+                {
+                    CheckUserFavorites(articleList);
+                }
+                BindRepeaterDataSource();
                 FillCriterion(ddlField.Text.ToLower());
             }
-            IsFilterActive = chbxFilters.Checked;
+            chbxFilters_CheckedChanged(sender, e);
         }
 
         protected void btnSeeDetail_Click(object sender, EventArgs e)
@@ -80,15 +107,33 @@ namespace Views
             {
                 articleList = articleController.FilterSearch(ddlField.SelectedValue, ddlCriterion.SelectedValue, "");
             }
-            repHomeGrid.DataSource = articleList;
-            repHomeGrid.DataBind();
+            CheckUserFavorites(articleList);
+            BindRepeaterDataSource();
         }
 
         protected void btnCleanFilters_Click(object sender, EventArgs e)
         {
             articleList = articleController.ListArticles();
-            repHomeGrid.DataSource = articleList;
-            repHomeGrid.DataBind();
+            CheckUserFavorites(articleList);
+            BindRepeaterDataSource();
+        }
+
+        protected void btnAddFavorite_Click(object sender, EventArgs e)
+        {
+            if (!IsUserLoggedIn())
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+            if (favoriteController.IsFavorite(int.Parse(Session["user"].ToString()), int.Parse(((Button)sender).CommandArgument)))
+            {
+                favoriteController.RemoveFavorite(int.Parse(Session["user"].ToString()), int.Parse(((Button)sender).CommandArgument));
+            }
+            else
+            {
+                favoriteController.SetFavorite(int.Parse(Session["user"].ToString()), int.Parse(((Button)sender).CommandArgument));
+            }
+            btnApplyFilter_Click(sender, e);
         }
     }
 }

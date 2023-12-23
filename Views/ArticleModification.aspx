@@ -33,7 +33,7 @@
                         <label class="form-label">Url imagen:</label>
                         <asp:TextBox ID="txtbImageUrl" TextMode="MultiLine" OnTextChanged="txtbImageUrl_TextChanged" CssClass="form-control mb-2" AutoPostBack="true" runat="server" />
                         <div class="text-center align-items-center">
-                            <asp:Image ImageUrl="<%# txtbImageUrl.Text %>" ID="articleImage" runat="server" />
+                            <asp:Image ImageUrl="<%# txtbImageUrl.Text %>" ID="articleImage" onerror="imgError(this)" runat="server" />
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
