@@ -3,7 +3,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Views;
 
-namespace Model
+namespace Views
 {
     public static class Validation
     {

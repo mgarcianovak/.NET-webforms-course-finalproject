@@ -107,14 +107,22 @@ namespace Views
             {
                 articleList = articleController.FilterSearch(ddlField.SelectedValue, ddlCriterion.SelectedValue, "");
             }
-            CheckUserFavorites(articleList);
+            if (IsUserLoggedIn())
+            {
+                CheckUserFavorites(articleList);
+            }
             BindRepeaterDataSource();
         }
 
         protected void btnCleanFilters_Click(object sender, EventArgs e)
         {
+            chbxFilters.Checked = false;
+            chbxFilters_CheckedChanged(sender, e);
             articleList = articleController.ListArticles();
-            CheckUserFavorites(articleList);
+            if (IsUserLoggedIn())
+            {
+                CheckUserFavorites(articleList);
+            }
             BindRepeaterDataSource();
         }
 

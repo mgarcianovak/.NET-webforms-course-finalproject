@@ -11,30 +11,6 @@ namespace Controller
     {
         private readonly DataAccess dataAccess = new DataAccess();
 
-        public List<Brand> List()
-        {
-            List<Brand> brandList = new List<Brand>();
-            try
-            {
-                dataAccess.SetCommandText("Select Id, Descripcion from MARCAS");
-                dataAccess.ReadData();
-                while (dataAccess.Reader.Read())
-                {
-                    Brand aux = new Brand
-                    {
-                        Id = (int)dataAccess.Reader["Id"],
-                        Description = (string)dataAccess.Reader["Descripcion"]
-                    };
-                    brandList.Add(aux);
-                }
-                return brandList;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
         public bool IsFavorite(int userId, int articleId)
         {
             try
@@ -92,12 +68,33 @@ namespace Controller
             }
         }
 
-        //public List<Favorite> GetFavorites(int userId, int articleId)
-        //{
-        //    dataAccess.SetCommandText("SELECT ");
+        public List<Favorite> ListFavorites(int userId)
+        {
+            List<Favorite> favoriteList = new List<Favorite>();
+            try
+            {
+                dataAccess.SetCommandText($"SELECT Id, IdArticulo FROM FAVORITOS WHERE IdUser = {userId}");
+                dataAccess.ReadData();
+                while (dataAccess.Reader.Read())
+                {
+                    Favorite aux = new Favorite();
+                    aux.Id = (int)dataAccess.Reader["Id"];
+                    aux.ArticleId = (int)dataAccess.Reader["IdArticulo"];
+                    aux.UserId = userId;
+                    favoriteList.Add(aux);
+                }
+            }
+            catch (Exception ex)
+            {
 
-        //    return new List<Favorite>();
-        //}
+            }
+            finally
+            {
+                dataAccess.CloseConnection();
+            }
+
+            return favoriteList;
+        }
 
     }
 }

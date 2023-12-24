@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" />
-    <div class="container-fluid">
+    <div class="container-fluid content">
         <h2 class="my-2"><%: pageTitle %></h2>
         <div class="row">
             <div class="col-6 col-md-5 col-lg-4 col-xl-3">
@@ -23,8 +23,10 @@
                 <label class="form-label">Precio:</label>
                 <asp:TextBox ID="txtbPrice" CssClass="form-control mb-2" runat="server" />
                 <hr />
-                <asp:Button Text="Modificar" ID="btnModify" CssClass="btn btn-primary" OnClick="btnModify_Click" runat="server" />
-                <asp:Button Text="Eliminar" ID="btnDelete" CssClass="btn btn-danger" OnClick="btnDelete_Click" runat="server" />
+                <div class="d-flex justify-content-between mb-2">
+                    <asp:Button Text="Eliminar" ID="btnDelete" CssClass="btn btn-danger" OnClick="btnDelete_Click" runat="server" />
+                    <asp:Button Text="Modificar" ID="btnModify" CssClass="btn btn-primary" OnClick="btnModify_Click" runat="server" />
+                </div>
                 <asp:CheckBox Text="Confirmar eliminación" CssClass="form-check-input" ID="chbxDelete" runat="server" />
             </div>
             <div class="col-6 col-md-5 col-lg-4 col-xl-3">

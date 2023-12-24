@@ -78,15 +78,6 @@ namespace Views
         protected global::System.Web.UI.WebControls.TextBox txtbPrice;
 
         /// <summary>
-        /// Control btnModify.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModify;
-
-        /// <summary>
         /// Control btnDelete.
         /// </summary>
         /// <remarks>
@@ -94,6 +85,15 @@ namespace Views
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDelete;
+
+        /// <summary>
+        /// Control btnModify.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModify;
 
         /// <summary>
         /// Control chbxDelete.

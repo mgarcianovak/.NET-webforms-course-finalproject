@@ -110,6 +110,8 @@ namespace Views
                 else
                 {
                     btnModify.Text = "Agregar";
+                    btnDelete.CssClass = "d-none";
+                    chbxDelete.CssClass = "d-none";
                     pageTitle = "Agregar artículo:";
                     txtbId.Text = articleController.GetNextId().ToString();
                     LoadDropDownList(ddlBrand, brandController.List());

@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" />
-    <div class="container-fluid px-3">
+    <div class="container-fluid px-3 content">
         <div class="row mt-2">
             <div class="col-auto">
                 <h2>Catálogo:</h2>
@@ -49,7 +49,7 @@
                     <%
                         }%>
                     <%else
-                    { %>
+                        { %>
                     <div class="col col-md-4 col-lg-3">
                         <asp:Label ID="lblGreaterThan" Text="Desde:" runat="server" />
                         <asp:TextBox CssClass="form-control mt-2" ID="txtbGreaterThan" runat="server" />
@@ -83,8 +83,10 @@
                                 <h5 class="card-title text-uppercase"><%# Eval("Name") %></h5>
                                 <h6 class="card-subtitle mb-2 text-body-secondary"><%# Eval("Brand") %></h6>
                                 <p class="card-text"><%# ((decimal)Eval("Price")).ToString("C2") %></p>
-                                <asp:Button Text="Ver más" CssClass="btn btn-secondary mb-2" ID="btnSeeDetail" OnClick="btnSeeDetail_Click" runat="server" CommandArgument='<%# Eval("Id")%>' CommandName="articleId" />
-                                <asp:Button Text='<%# Eval("IsFavoriteReturn") %>' CssClass="btn btn-outline-warning mb-2" ID="btnAddFavorite" OnClick="btnAddFavorite_Click" CommandArgument='<%# Eval("Id")%>' CommandName="articleId" runat="server" />
+                                <div class="d-flex justify-content-between">
+                                    <asp:Button Text="Ver más" CssClass="btn btn-secondary mb-2" ID="btnSeeDetail" OnClick="btnSeeDetail_Click" runat="server" CommandArgument='<%# Eval("Id")%>' CommandName="articleId" />
+                                    <asp:Button Text='<%# Eval("IsFavoriteReturn") %>' CssClass="btn btn-outline-warning mb-2" ID="btnAddFavorite" OnClick="btnAddFavorite_Click" CommandArgument='<%# Eval("Id")%>' CommandName="articleId" runat="server" />
+                                </div>
                             </div>
                         </div>
                     </div>

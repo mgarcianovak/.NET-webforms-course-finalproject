@@ -55,6 +55,17 @@ namespace Controller
             }
         }
 
+        public List<Article> ListFavoriteArticles(List<Favorite> favorites)
+        {
+            List<Article> articleList = new List<Article>();
+            foreach (Favorite favorite in favorites)
+            {
+                Article aux = GetArticleById(favorite.ArticleId);
+                articleList.Add(aux);
+            }
+            return articleList;
+        }
+
         public List<Article> FilterSearch(string field, string criterion, string filter)
         {
             string query = "SELECT a.Id, Codigo, Nombre, a.Descripcion, c.Descripcion Categoria, IdCategoria, m.Descripcion Marca, IdMarca, ImagenUrl, Precio " +
